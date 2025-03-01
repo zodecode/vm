@@ -75,7 +75,7 @@ else
 fi
 
 # ============================================================
-#display_header "Installing pipx"
-#sudo apt install pipx -y && pipx ensurepath && sudo pipx ensurepath --global
+display_header "Installing pipx"
+sudo apt install pipx -y && pipx ensurepath
 
 echo "✅ $stage"

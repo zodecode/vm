@@ -17,7 +17,7 @@ if [[ $1 = "-e" ]]; then
     FORMAT="text"
 fi
 if ! python3 -c "import tabulate" 2>/dev/null; then
-    pip install tabulate
+    pipx install tabulate
 fi
 
 echo -e "\nSystem tools versions\n"
