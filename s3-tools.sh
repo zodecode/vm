@@ -30,12 +30,6 @@ if [ ! -d "$HOME/.fzf" ]; then
     ~/.fzf/install --all
 fi
 # ============================================================
-# JDK Installation via sdkman
-# display_header "Installing JDK"
-# [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
-# sdk install java 21.0.6-zulu
-
-# ============================================================
 display_header "Installing tldr"
 npm install -g tldr
 

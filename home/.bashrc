@@ -73,6 +73,7 @@ fi
 # ========================================
 # VARIABLES AND SETTINGS
 # ========================================
+export HISTTIMEFORMAT="%y/%m/%d %T "
 stty -ixon
 PROMPT_DIRTRIM=2
 export EDITOR=vim
