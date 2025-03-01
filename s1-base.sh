@@ -46,18 +46,25 @@ sudo apt install attr colordiff tree gparted net-tools httpie -y
 # Tilix Installation
 display_header "Installing Tilix (deb package)"
 
-# tilix_package="tilix_1.9.6-2build1_amd64.deb"
-# tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+tilix_package="tilix_1.9.6-2build1_amd64.deb"
+tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+# tilix_package="tilix_1.9.6-2build2_amd64.deb"
+# tilix_url="http://mirrors.edge.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+rm -f $tilix_package
 
-tilix_package="tilix_1.9.6-2build2_amd64.deb"
-tilix_url="http://mirrors.edge.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
-
-# wget http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/tilix_1.9.6-2build1_amd64.deb
 wget $tilix_url
-# sudo apt install ./tilix_1.9.6-2build1_amd64.deb -y
-# rm tilix_1.9.6-2build1_amd64.deb
 sudo apt install $tilix_package -y
-rm $tilix_package
+
+rm -f $tilix_package
+
+if ! grep -q "if [ '\$TILIX_ID' ]" $HOME/.bashrc; then
+cat <<EOF >> $HOME/.bashrc
+if [ "\$TILIX_ID" ] || [ "\$VTE_VERSION" ]; then
+  source /etc/profile.d/vte.sh
+fi
+EOF
+    echo "Added TILIX_ID to .bashrc"
+fi
 
 # ============================================================
 #display_header "Installing pipx"
