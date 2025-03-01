@@ -3,6 +3,7 @@ set -e
 target="Ubuntu 24.04"
 stage="Stage 1"
 echo "$stage - $target - installing base packages"
+
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
@@ -12,6 +13,7 @@ command_exists() {
 }
 display_header "Checking sudo access"
 sudo -v
+
 # ============================================================
 display_header "Installing base utilities"
 sudo apt install curl git wget tree -y
@@ -35,7 +37,7 @@ sudo apt-get install python3-pip python3-venv python3-gpg \
 
 # ============================================================
 display_header "Installing search and utility tools"
-sudo apt install silversearcher-ag jq sqlite3 mc -y
+sudo apt install vim silversearcher-ag jq sqlite3 mc -y
 # ============================================================
 display_header "Installing system monitoring and utility tools"
 sudo apt install htop neofetch shellcheck figlet meld -y
@@ -52,7 +54,6 @@ if ! command_exists rustc; then
 
   tilix_package="tilix_1.9.6-2build1_amd64.deb"
   tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
-  # rm -f $tilix_package
 
   wget $tilix_url && sudo apt install ./$tilix_package -y
 
