@@ -17,8 +17,11 @@ if [[ $1 = "-e" ]]; then
     FORMAT="text"
 fi
 if ! python3 -c "import tabulate" 2>/dev/null; then
+    echo "tabulate not installed!"
     if ! command -v pipx >/dev/null; then
         sudo apt install pipx -y && pipx ensurepath && pipx install tabulate
+    else 
+        pipx install tabulate
     fi
 fi
 
