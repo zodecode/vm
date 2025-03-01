@@ -13,9 +13,6 @@ command_exists() {
 }
 display_header "Checking sudo access"
 sudo -v
-
-
-
 # ============================================================
 # Rust Installation
 display_header "Installing Rust"
@@ -37,6 +34,7 @@ if [[ ! -e $GO_FILE ]]; then
     display_header "Configuring Go in system PATH"
     if ! grep -q "export PATH=\$PATH:/usr/local/go/bin" /etc/profile; then
         echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee -a /etc/profile
+        echo 'export PATH="$HOME/go/bin:$PATH"' >> ~/.bashrc
         echo "Added Go to system-wide PATH in /etc/profile"
     fi
 else
@@ -55,11 +53,21 @@ display_header "Installing NODE with nvm ($NVM_VERSION)"
 fi
 # ============================================================
 # SDKMAN Installation
-display_header "Installing SDKMAN"
+# display_header "Installing SDKMAN"
+# if ! command_exists sdk; then
+#     curl -s "https://get.sdkman.io" | bash
+#     source "$HOME/.sdkman/bin/sdkman-init.sh"
+# fi
+
+display_header "Installing JDK"
+JDK="21.0.6-zulu"
 if ! command_exists sdk; then
     curl -s "https://get.sdkman.io" | bash
     source "$HOME/.sdkman/bin/sdkman-init.sh"
 fi
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+sdk install java $JDK
+
 # ============================================================
 
 echo "✅ $stage"
