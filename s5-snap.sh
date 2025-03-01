@@ -37,7 +37,6 @@ sudo snap install telegram-desktop
 sudo snap install vlc
 sudo snap install sublime-text --classic
 sudo snap install docker
-sudo snap install tor
 sudo snap install postman
 
 # ============================================================
