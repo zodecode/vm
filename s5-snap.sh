@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 target="Ubuntu 24.04"
 stage="Stage 5"

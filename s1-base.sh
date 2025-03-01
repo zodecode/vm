@@ -7,6 +7,9 @@ display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
 }
+command_exists() {
+    command -v "$1" >/dev/null 2>&1
+}
 display_header "Checking sudo access"
 sudo -v
 # ============================================================
@@ -45,13 +48,14 @@ sudo apt install attr colordiff tree gparted net-tools httpie -y
 # ============================================================
 # Tilix Installation
 display_header "Installing Tilix (deb package)"
+if ! command_exists rustc; then
 
-tilix_package="tilix_1.9.6-2build1_amd64.deb"
-tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
-# rm -f $tilix_package
+  tilix_package="tilix_1.9.6-2build1_amd64.deb"
+  tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+  # rm -f $tilix_package
 
-wget $tilix_url
-sudo apt install $tilix_package -y
+  wget $tilix_url
+  sudo apt install $tilix_package -y
 
 if ! grep -q "TILIX_ID" $HOME/.bashrc; then
 cat <<EOF >> $HOME/.bashrc
@@ -62,11 +66,14 @@ EOF
     echo "Added TILIX_ID to .bashrc"
 fi
 
-sudo rm -f /etc/profile.d/vte.sh
-sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
+  sudo rm -f /etc/profile.d/vte.sh
+  sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
 
-rm -f $tilix_package
+  rm -f $tilix_package
 
+else
+  echo "tilix already installed"
+fi
 
 # ============================================================
 #display_header "Installing pipx"
