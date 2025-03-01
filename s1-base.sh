@@ -6,14 +6,14 @@ echo "$stage - $target - installing base packages"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 display_header "Checking sudo access"
 sudo -v
 # ============================================================
-display_header "Installing git and wget"
-sudo apt install git wget curl -y
-# ============================================================
+display_header "Installing base utilities"
+sudo apt install curl git wget -y
+
+display_header "Installing build tools"
 sudo apt install -y make build-essential \
     libssl-dev zlib1g-dev libbz2-dev \
     libreadline-dev libsqlite3-dev \
@@ -29,7 +29,6 @@ display_header "Installing Python packages and dependencies"
 sudo apt-get install python3-pip python3-venv python3-gpg \
   python3-dev python3-openssl python3-tk python3-wheel \
   python3-setuptools -y
-# sudo pip install tabulate
 
 # ============================================================
 display_header "Installing search and utility tools"
@@ -45,13 +44,23 @@ display_header "Installing system utilities"
 sudo apt install attr colordiff tree gparted net-tools httpie -y
 # ============================================================
 # Tilix Installation
-display_header "Installing Tilix"
-wget http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/tilix_1.9.6-2build1_amd64.deb
-sudo apt install ./tilix_1.9.6-2build1_amd64.deb -y
-rm tilix_1.9.6-2build1_amd64.deb
+display_header "Installing Tilix (deb package)"
+
+# tilix_package="tilix_1.9.6-2build1_amd64.deb"
+# tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+
+tilix_package="tilix_1.9.6-2build2_amd64.deb"
+tilix_url="http://mirrors.edge.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
+
+# wget http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/tilix_1.9.6-2build1_amd64.deb
+wget $tilix_url
+# sudo apt install ./tilix_1.9.6-2build1_amd64.deb -y
+# rm tilix_1.9.6-2build1_amd64.deb
+sudo apt install $tilix_package -y
+rm $tilix_package
 
 # ============================================================
 #display_header "Installing pipx"
 #sudo apt install pipx -y && pipx ensurepath && sudo pipx ensurepath --global
 
-echo "✅"
+echo "✅ $stage"

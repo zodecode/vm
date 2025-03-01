@@ -6,7 +6,6 @@ echo "$stage - Update system: $target"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 display_header "Checking sudo access"
 sudo -v
@@ -15,4 +14,7 @@ sudo -v
 display_header "Updating system packages"
 sudo apt-get update && sudo apt-get upgrade -y
 
-echo "✅"
+display_header "Base utilities"
+sudo apt install curl git wget -y
+
+echo "✅ $stage"
