@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # @brief check system tools version
 # @tag system
-# require: pip install tabulate
+# require: pipx install tabulate
 # ############################################
 # set +e
 FORMAT="ansi"
@@ -11,18 +11,14 @@ B=$(tput bold)
 Y=$(tput setaf 215)
 M=$(tput setaf 5)
 x=":"
-
 if [[ $1 = "-e" ]]; then
-    # escape ansi colors
     FORMAT="text"
 fi
-if ! python3 -c "import tabulate" 2>/dev/null; then
-    echo "tabulate not installed!"
-    if ! command -v pipx >/dev/null; then
-        sudo apt install pipx -y && pipx ensurepath && pipx install tabulate
-    else 
-        pipx install tabulate
-    fi
+if ! command -v pipx >/dev/null; then
+    sudo apt install pipx -y && pipx ensurepath && pipx install tabulate
+fi
+if ! pipx list | grep -q "tabulate"; then
+    pipx install tabulate
 fi
 
 echo -e "\nSystem tools versions\n"
@@ -80,7 +76,7 @@ tab_out=$(printf "%s" "$out" | tabulate -1 --format $fmt --sep $x -)
 if [[ $FORMAT = "ansi" ]]; then
     printf "%s\n" "$tab_out"
 else
-    # -e: escape ansi colors
+    # [-e] escape ansi colors
     clean_out=$(printf "%s\n" "$tab_out" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g" | sed -r "s/\x1B\(B//g")
     echo "$clean_out"
     echo "timestamp: $(date '+%Y-%m-%d %H:%M:%S')"
