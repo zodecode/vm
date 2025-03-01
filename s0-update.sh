@@ -18,3 +18,4 @@ display_header "Base utilities"
 sudo apt install curl git wget tree -y
 
 echo "✅ $stage"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info

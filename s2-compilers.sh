@@ -52,13 +52,6 @@ display_header "Installing NODE with nvm ($NVM_VERSION)"
     nvm install node
 fi
 # ============================================================
-# SDKMAN Installation
-# display_header "Installing SDKMAN"
-# if ! command_exists sdk; then
-#     curl -s "https://get.sdkman.io" | bash
-#     source "$HOME/.sdkman/bin/sdkman-init.sh"
-# fi
-
 display_header "Installing JDK"
 JDK="21.0.6-zulu"
 if ! command_exists sdk; then
@@ -71,4 +64,5 @@ sdk install java $JDK
 # ============================================================
 
 echo "✅ $stage"
-echo "restart terminal"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info
+echo "reboot system"

@@ -79,4 +79,5 @@ display_header "Installing pipx"
 sudo apt install pipx -y && pipx ensurepath
 
 echo "✅ $stage"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info
 echo "restart terminal"

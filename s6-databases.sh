@@ -19,3 +19,4 @@ sudo apt install mongodb -y
 # ============================================================
 
 echo "✅ $stage"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info

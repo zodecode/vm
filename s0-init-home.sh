@@ -18,4 +18,5 @@ cp "$SCRIPT_DIR/home/sysapps" "$HOME/bin"
 unzip -o "$SCRIPT_DIR/home/Pictures.zip" -d "$HOME/"
 
 echo "✅ $stage"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info
 echo "restart terminal"

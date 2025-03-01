@@ -63,4 +63,5 @@ fi
 # ============================================================
 
 echo "✅ $stage"
+echo "✅ $stage - $(date '+%Y-%m-%d %H:%M:%S')" >> log.info
 echo "restart terminal"
