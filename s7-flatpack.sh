@@ -15,7 +15,21 @@ sudo -v
 
 # ============================================================
 display_header "Installing tor"
+
 # Install dependencies
+sudo apt install flatpak
+flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+flatpak install flathub org.gnome.Boxes
+
+flatpak install flathub com.protonvpn.www
+flatpak install flathub com.anydesk.Anydesk
+
+flatpak install flathub org.qbittorrent.qBittorrent
+flatpak install flathub dev.geopjr.Archives
+
+
+
 if ! command_exists flatpak; then
     echo "installing"
     
