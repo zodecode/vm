@@ -23,26 +23,30 @@ if ! command_exists rustc; then
 fi
 # ============================================================
 # Go Installation
-display_header "Installing Go"
-if ! command_exists go; then
-    GO_VERSION="1.24.0"
+GO_VERSION="1.24.0"
+display_header "Installing Go $GO_VERSION"
+GO_FILE="/usr/local/go/bin/go"
+if [[ ! -e $GO_FILE ]]; then
+    echo "installing version: $GO_VERSION"
     GO_TAR="go${GO_VERSION}.linux-amd64.tar.gz"
-    wget "https://go.dev/dl/${GO_TAR}" && tar -C /usr/local -xzf "${GO_TAR}"
+    wget "https://go.dev/dl/${GO_TAR}" && sudo tar -C /usr/local -xzf "${GO_TAR}"
     rm "${GO_TAR}"
-    
     # Add Go to system-wide PATH using tee
     display_header "Configuring Go in system PATH"
     if ! grep -q "export PATH=\$PATH:/usr/local/go/bin" /etc/profile; then
         echo 'export PATH=$PATH:/usr/local/go/bin' | sudo tee -a /etc/profile
         echo "Added Go to system-wide PATH in /etc/profile"
     fi
+else
+    echo "GO already installed"
 fi
 
 # ============================================================
 # Node.js Installation via NVM
-display_header "Installing Node.js via NVM"
+NVM_VERSION="v0.40.1"
+display_header "Installing NODE with nvm ($NVM_VERSION)"
     if ! command_exists nvm; then
-    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/$NVM_VERSION/install.sh | bash
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
     nvm install node
