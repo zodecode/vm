@@ -15,6 +15,6 @@ display_header "Updating system packages"
 sudo apt-get update && sudo apt-get upgrade -y
 
 display_header "Base utilities"
-sudo apt install curl git wget -y
+sudo apt install curl git wget tree -y
 
 echo "✅ $stage"

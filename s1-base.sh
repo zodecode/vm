@@ -14,7 +14,7 @@ display_header "Checking sudo access"
 sudo -v
 # ============================================================
 display_header "Installing base utilities"
-sudo apt install curl git wget -y
+sudo apt install curl git wget tree -y
 
 display_header "Installing build tools"
 sudo apt install -y make build-essential \
@@ -35,7 +35,7 @@ sudo apt-get install python3-pip python3-venv python3-gpg \
 
 # ============================================================
 display_header "Installing search and utility tools"
-sudo apt install silversearcher-ag jq sqlite3 -y
+sudo apt install silversearcher-ag jq sqlite3 mc -y
 # ============================================================
 display_header "Installing system monitoring and utility tools"
 sudo apt install htop neofetch shellcheck figlet meld -y
@@ -44,7 +44,7 @@ display_header "Installing document tools"
 sudo apt install pandoc pdftk w3m -y
 # ============================================================
 display_header "Installing system utilities"
-sudo apt install attr colordiff tree gparted net-tools httpie -y
+sudo apt install attr colordiff gparted net-tools httpie -y
 # ============================================================
 # Tilix Installation
 display_header "Installing Tilix (deb package)"
