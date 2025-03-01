@@ -54,8 +54,7 @@ if ! command_exists rustc; then
   tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
   # rm -f $tilix_package
 
-  wget $tilix_url
-  sudo apt install $tilix_package -y
+  wget $tilix_url && sudo apt install ./$tilix_package -y
 
 if ! grep -q "TILIX_ID" $HOME/.bashrc; then
 cat <<EOF >> $HOME/.bashrc
