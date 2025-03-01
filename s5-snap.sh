@@ -13,6 +13,8 @@ command_exists() {
 display_header "Checking sudo access"
 sudo -v
 
+sudo snap refresh
+
 # ============================================================
 display_header "Installing FUSE"
 sudo apt install libfuse2 -y
@@ -34,6 +36,9 @@ sudo snap install sqlitebrowser
 sudo snap install telegram-desktop
 sudo snap install vlc
 sudo snap install sublime-text --classic
+sudo snap install docker
+sudo snap install tor
+sudo snap install postman
 
 # ============================================================
 
