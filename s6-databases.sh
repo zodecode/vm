@@ -6,7 +6,6 @@ echo "$stage - $target - installing databases"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 display_header "Checking sudo access"
 sudo -v

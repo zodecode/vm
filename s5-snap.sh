@@ -6,7 +6,6 @@ echo "$stage - Install $target vscode and snap packages"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 display_header "Checking sudo access"
 sudo -v
@@ -59,7 +58,5 @@ code --install-extension ms-toolsai.jupyter
 code --install-extension njpwerner.autodocstring
 code --install-extension kevinrose.vsc-python-indent
 # ============================================================
-# Final message
-
 
 echo "✅"

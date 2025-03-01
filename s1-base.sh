@@ -48,16 +48,12 @@ display_header "Installing Tilix (deb package)"
 
 tilix_package="tilix_1.9.6-2build1_amd64.deb"
 tilix_url="http://mirrors.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
-# tilix_package="tilix_1.9.6-2build2_amd64.deb"
-# tilix_url="http://mirrors.edge.kernel.org/ubuntu/pool/universe/t/tilix/${tilix_package}"
-rm -f $tilix_package
+# rm -f $tilix_package
 
 wget $tilix_url
 sudo apt install $tilix_package -y
 
-rm -f $tilix_package
-
-if ! grep -q "if [ '\$TILIX_ID' ]" $HOME/.bashrc; then
+if ! grep -q "TILIX_ID" $HOME/.bashrc; then
 cat <<EOF >> $HOME/.bashrc
 if [ "\$TILIX_ID" ] || [ "\$VTE_VERSION" ]; then
   source /etc/profile.d/vte.sh
@@ -65,6 +61,12 @@ fi
 EOF
     echo "Added TILIX_ID to .bashrc"
 fi
+
+sudo rm -f /etc/profile.d/vte.sh
+sudo ln -s /etc/profile.d/vte-2.91.sh /etc/profile.d/vte.sh
+
+rm -f $tilix_package
+
 
 # ============================================================
 #display_header "Installing pipx"

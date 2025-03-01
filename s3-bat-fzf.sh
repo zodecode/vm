@@ -2,11 +2,10 @@
 set -e
 target="Ubuntu 24.04"
 stage="Stage 3"
-echo "$stage - $target - installing: rust apps"
+echo "$stage - $target - installing rust/go/npm apps"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 # Function to check if a command exists
 command_exists() {
@@ -28,8 +27,13 @@ if [ ! -d "$HOME/.fzf" ]; then
     ~/.fzf/install --all
 fi
 # ============================================================
+# JDK Installation via sdkman
+display_header "Installing JDK"
+sdk install java 21.0.6-zulu
+# ============================================================
 # tldr Installation via npm
 display_header "Installing tldr"
 npm install -g tldr
 
 echo "✅"
+echo "restart terminal"

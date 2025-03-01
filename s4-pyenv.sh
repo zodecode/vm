@@ -6,7 +6,6 @@ echo "$stage - Install $target pyenv"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
-    # echo "=================================================="
 }
 display_header "Checking sudo access"
 sudo -v
@@ -46,6 +45,6 @@ echo 'export PATH="$HOME/.cargo/bin:$PATH"' >> ~/.bashrc
 
 
 # ============================================================
-# Final message
 
 echo "✅"
+echo "restart terminal"
