@@ -27,8 +27,8 @@ fi
 display_header "Installing Go"
 GO_VERSION="1.24.0"
 GO_TAR="go${GO_VERSION}.linux-amd64.tar.gz"
-wget "https://go.dev/dl/${GO_TAR}"
-sudo rm -rf /usr/local/go && tar -C /usr/local -xzf "${GO_TAR}"
+wget "https://go.dev/dl/${GO_TAR}" && tar -C /usr/local -xzf "${GO_TAR}"
+# sudo rm -rf /usr/local/go && tar -C /usr/local -xzf "${GO_TAR}"
 # sudo tar -C /usr/local -xzf "${GO_TAR}"
 rm "${GO_TAR}"
 

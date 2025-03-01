@@ -12,7 +12,7 @@ display_header "Checking sudo access"
 sudo -v
 # ============================================================
 display_header "Installing git and wget"
-sudo apt install git wget -y
+sudo apt install git wget curl -y
 # ============================================================
 sudo apt install -y make build-essential \
     libssl-dev zlib1g-dev libbz2-dev \
@@ -29,7 +29,7 @@ display_header "Installing Python packages and dependencies"
 sudo apt-get install python3-pip python3-venv python3-gpg \
   python3-dev python3-openssl python3-tk python3-wheel \
   python3-setuptools -y
-sudo pip install tabulate
+# sudo pip install tabulate
 
 # ============================================================
 display_header "Installing search and utility tools"
@@ -51,7 +51,7 @@ sudo apt install ./tilix_1.9.6-2build1_amd64.deb -y
 rm tilix_1.9.6-2build1_amd64.deb
 
 # ============================================================
-display_header "Installing pipx"
-sudo apt install pipx -y && pipx ensurepath && sudo pipx ensurepath --global
+#display_header "Installing pipx"
+#sudo apt install pipx -y && pipx ensurepath && sudo pipx ensurepath --global
 
 echo "✅"
