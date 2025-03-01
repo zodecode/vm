@@ -40,5 +40,5 @@ display_header "Installing tldr"
 npm install -g tldr
 
 # ============================================================
-echo "✅"
+echo "✅ $stage"
 echo "restart terminal"

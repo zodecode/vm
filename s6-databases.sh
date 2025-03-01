@@ -18,4 +18,4 @@ sudo apt install redis-server -y
 sudo apt install mongodb -y
 # ============================================================
 
-echo "✅"
+echo "✅ $stage"

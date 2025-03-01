@@ -79,3 +79,4 @@ display_header "Installing pipx"
 sudo apt install pipx -y && pipx ensurepath
 
 echo "✅ $stage"
+echo "restart terminal"

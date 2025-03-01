@@ -14,6 +14,8 @@ command_exists() {
 display_header "Checking sudo access"
 sudo -v
 
+
+
 # ============================================================
 # Rust Installation
 display_header "Installing Rust"

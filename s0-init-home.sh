@@ -12,5 +12,8 @@ display_header() {
 display_header "Create user home files"
 cd "$HOME" && mkdir -p bin .fonts data Temp Softwares
 cp "$SCRIPT_DIR/home/.bash_aliases" "$HOME/"
+cp "$SCRIPT_DIR/home/sysapps" "$HOME/bin"
 unzip -o "$SCRIPT_DIR/home/Pictures.zip" -d "$HOME/"
+
 echo "✅ $stage"
+echo "restart terminal"
