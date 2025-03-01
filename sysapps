@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+# @brief check system tools version
+# @tag system
+# require: pip install tabulate
+# ############################################
+# set +e
+FORMAT="ansi"
+exec 2>/dev/null
+S=$(tput sgr0)
+B=$(tput bold)
+Y=$(tput setaf 215)
+M=$(tput setaf 5)
+x=":"
+
+if [[ $1 = "-e" ]]; then
+    # escape ansi colors
+    FORMAT="text"
+fi
+if ! python3 -c "import tabulate" 2>/dev/null; then
+    pip install tabulate
+fi
+
+echo -e "\nSystem tools versions\n"
+out=$(cat <<EOF
+tool $x version
+${Y}hostname $x ${S} $(hostname)
+${Y}linux $x ${S} $(lsb_release -d | awk 'NR==1{print $2" "$3}')
+${Y}codename $x ${S} $(lsb_release -c | awk 'NR==1{print $2" "$3}')
+${Y}gnome $x ${S} $(gnome-shell --version)
+${Y}kernel $x ${S} $(uname -r)
+${Y}gpu $x ${S} $(nvidia-smi --query-gpu=name --format=csv,noheader)
+${Y}driver $x ${S} $(nvidia-smi --query-gpu=driver_version --format=csv,noheader)
+${Y}cuda $x ${S} $(nvcc --version | awk 'NR==4{print $0}')
+--------- 
+${Y}bat $x ${S} $(bat -V | awk 'NR==1{print $2}')
+${Y}docker $x ${S} $(docker --version | awk 'NR==1{print $3}')
+${Y}fd $x ${S} $(fd --version)
+${Y}fzf $x ${S} $(fzf --version)
+${Y}git $x ${S} $(git --version | awk 'NR==1{print $3}')
+${Y}gh $x ${S} $(gh --version | awk 'NR==1{print $3}')
+--------- 
+${Y}chrome $x ${S} $(google-chrome --version | awk 'NR==1{print $3}')
+${Y}firefox $x ${S} $(firefox --version | awk 'NR==1{print $3}')
+${Y}brave $x ${S} $(brave --version | awk 'NR==1{print $3}')
+${Y}chromium $x ${S} $(chromium --version | awk 'NR==1{print $2}')
+--------- 
+${Y}gcc    $x ${S} $(gcc --version | awk 'NR==1{print $4}')
+${Y}go $x ${S} $(go version | awk 'NR==1{print $3}')
+${M}java $x ${S} $(java --version | awk 'NR==1{print $2}')
+${Y}rustc $x ${S} $(rustc -V | awk 'NR==1{print $2}')
+--------- 
+${Y}deno $x ${S} $(deno --version | awk 'NR==1{print $2}')
+${Y}npm $x ${S} $(npm --version)
+${M}node $x ${S} ${M}$(node --version)${S}
+--------- 
+${M}python $x ${S} ${M}${B}$(python3 --version | awk 'NR==1{print $2}')${S}
+${Y}pyenv $x ${S} $(pyenv --version | awk 'NR==1{print $2}')
+${Y}uv $x ${S} $(uv version | awk 'NR==1{print $2}')
+${Y}poetry $x ${S} $(poetry --version | awk 'NR==1{print $0}')
+${Y}conda $x ${S} $(conda -V | awk 'NR==1{print $0}')
+--------- 
+${Y}vscode $x ${S} $(code --version | awk 'NR==1{print $0}')
+${Y}vim $x ${S} $(vim --version | awk 'NR==1{print $5}')
+${Y}shellcheck $x ${S} $(shellcheck --version | awk 'NR==2{print $2}')
+--------- 
+${Y}mongodb $x ${S} $(mongod --version | awk 'NR==1{print $3}')
+${Y}sqlite $x ${S} $(sqlite3 --version | awk 'NR==1{print $0}')
+${Y}mysql $x ${S} $(mysql --version | awk 'NR==1{print $3}')
+${Y}postgres $x ${S} $(psql --version | awk 'NR==1{print $3}')
+---------
+EOF
+)
+fmt="simple"
+tab_out=$(printf "%s" "$out" | tabulate -1 --format $fmt --sep $x -)
+if [[ $FORMAT = "ansi" ]]; then
+    printf "%s\n" "$tab_out"
+else
+    # -e: escape ansi colors
+    clean_out=$(printf "%s\n" "$tab_out" | sed -r "s/\x1B\[[0-9;]*[a-zA-Z]//g" | sed -r "s/\x1B\(B//g")
+    echo "$clean_out"
+    echo "timestamp: $(date '+%Y-%m-%d %H:%M:%S')"
+fi
