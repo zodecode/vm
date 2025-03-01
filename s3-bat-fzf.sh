@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 set -e
 target="Ubuntu 24.04"
 stage="Stage 3"
@@ -7,7 +7,6 @@ display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
 }
-# Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
 }
@@ -19,6 +18,10 @@ sudo -v
 display_header "Installing bat and fd-find"
 cargo install --locked bat
 cargo install fd-find
+# ============================================================
+display_header "Installing glow"
+go install github.com/charmbracelet/glow@latest
+
 # ============================================================
 # fzf Installation
 display_header "Installing fzf"
@@ -32,9 +35,9 @@ display_header "Installing JDK"
 sdk install java 21.0.6-zulu
 
 # ============================================================
-# tldr Installation via npm
 display_header "Installing tldr"
 npm install -g tldr
 
+# ============================================================
 echo "✅"
 echo "restart terminal"
