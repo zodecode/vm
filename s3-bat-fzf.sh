@@ -2,7 +2,7 @@
 set -e
 target="Ubuntu 24.04"
 stage="Stage 3"
-echo "$stage - $target - installing rust/go/npm apps"
+echo "$stage - $target - installing utilities"
 display_header() {
     echo "=================================================="
     echo -e "\n\033[1;34m($stage)>> $1\033[0m"
@@ -30,6 +30,7 @@ fi
 # JDK Installation via sdkman
 display_header "Installing JDK"
 sdk install java 21.0.6-zulu
+
 # ============================================================
 # tldr Installation via npm
 display_header "Installing tldr"
