@@ -20,8 +20,9 @@ display_header "Installing tor"
 sudo apt install flatpak
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
+flatpak install flathub com.calibre_ebook.calibre
 flatpak install flathub org.gnome.Boxes
-
+flatpak install flathub com.github.jeromerobert.pdfarranger
 flatpak install flathub com.protonvpn.www
 flatpak install flathub com.anydesk.Anydesk
 
